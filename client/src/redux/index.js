@@ -1,28 +1,11 @@
-import { createStore, combineReducers, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from './reducers';
 
-const { NODE_ENV } = process.env;
-const isDevelopment = NODE_ENV === 'development';
+const initialState = {};
 
-const reducers = {
-    spaceData: (oldState = {}, action) => {
-        const { type } = action;
-        switch (type) {
-            default:
-                return oldState;
-        }
-    },
-};
+const middleware = [thunk];
 
-const slices = combineReducers({ ...reducers });
-
-const  composeEnhancers = isDevelopment && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true, traceLimit: 25 })
-    : compose;
-
-
-const store = createStore(
-    slices,
-    composeEnhancers(),
-);
+const store = createStore(rootReducer, initialState, applyMiddleware(...middleware));
 
 export default store;

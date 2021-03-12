@@ -1,0 +1,2 @@
+export const FETCH_SHIPS = 'FETCH_SHIPS';
+export const FETCH_SHIP_COUNT = 'FETCH_SHIP_COUNT';
